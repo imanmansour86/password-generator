@@ -2,26 +2,25 @@
 var generateBtn = document.querySelector("#generate");
 
 function generatePassword() {
-  var lowercase = "abcdefghijklmnopqrstuvwxyz";
-  var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  var numbers = "0123456789";
-  var specialCharacters = "!$^&*-=+_?";
-
   var password = "";
+  var characterSet = [];
 
   var passwordLength = promptUser();
-  console.log("here " + passwordLength);
+  console.log("passwordLength from user choice here is " + passwordLength);
 
-  // var lowercase = confirm("Do you want to include lowercase?");
-  // var uppercase = confirm("Do you want to include uppercase?");
-  // var numeric = confirm("Do you want to include numeric?");
-  // var special = confirm("Do you want to include special characters?");
+  var pw = "";
+  var text = "";
+  var testobject = "abcd123%$";
+  for (var i = 0; i < passwordLength; i++) {
+    // var test = Math.floor(Math.random() * passwordLength);
+    text = testobject.charAt(Math.floor(Math.random() * testobject.length));
+    pw = pw + text;
+    // pw += test;
 
-  // var generatedPaswword = "";
-
-  // for (var i = 0; i < passwordLength; i++) {
-  //   var test = Math.floor(Math.random() * passwordLength);
-  // }
+    // return pw;
+    //   console.log("my pw + " + pw);
+  }
+  console.log("my great pw is " + pw);
 }
 
 function promptUser() {
@@ -42,11 +41,44 @@ function promptUser() {
     alert("Password length must be at least 8 characters");
   } else if (passwordLength > 128) {
     alert("Password length must be less than 129 characters");
-  }
-  return passwordLength;
-}
+  } else if (passwordLength >= 8 && passwordLength < 129) {
+    var lowercase = confirm("Do you want to include lowercase?");
+    var uppercase = confirm("Do you want to include uppercase?");
+    var numeric = confirm("Do you want to include numeric?");
+    var special = confirm("Do you want to include special characters?");
+    if (!lowercase && !uppercase && !numeric && !special) {
+      alert("At least one character type should be selected");
+    }
 
-promptUser();
+    var lowercase = "abcdefghijklmnopqrstuvwxyz";
+    var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var numbers = "0123456789";
+    var specialCharacters = "!$^&*-=+_?";
+
+    characterSet = "";
+    if (lowercase) {
+      characterSet = lowercase;
+    } else if (lowercase && uppercase) {
+      characterSet = lowercase + uppercase;
+    } else if (lowercase && specialCharacters) {
+      characterSet = lowercase + specialCharacters;
+    } else if (lowercase && uppercase && specialCharacters) {
+      characterSet = lowercase + uppercase + specialCharacters;
+    } else if (uppercase) {
+      characterSet = uppercase;
+    } else if (uppercase && specialCharacters) {
+      characterSet = uppercase + specialCharacters;
+    } else if (specialCharacters) {
+      characterSet = specialCharacters;
+    }
+
+    console.log("character set here is " + characterSet);
+  }
+
+  //condition for special chatacter
+
+  return passwordLength; //return number of characters for the password
+}
 
 // Write password to the #password input
 function writePassword() {
