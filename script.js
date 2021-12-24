@@ -3,6 +3,8 @@ var generateBtn = document.querySelector("#generate");
 
 function generatePassword() {
   var characterSet = "";
+  var pw = "";
+  var text = "";
 
   var passwordLength = prompt(
     "How many characters would you like your password to contain?",
@@ -44,37 +46,48 @@ function generatePassword() {
 
     if (lowercaseConfirm) {
       characterSet += lowercase;
+      var lowercaseCharacter = lowercase.charAt(
+        Math.floor(Math.random() * lowercase.length)
+      );
+      pw += lowercaseCharacter;
+      console.log("hello i am here lower " + lowercaseCharacter);
     }
     if (uppercaseConfirm) {
       characterSet += uppercase;
+      var uppercaseCharacter = uppercase.charAt(
+        Math.floor(Math.random() * uppercase.length)
+      );
+      pw += uppercaseCharacter;
+
+      console.log("hello i am here upper " + uppercaseCharacter);
     }
     if (specialConfirm) {
       characterSet += specialCharacters;
+      var specialcaseCharacter = specialCharacters.charAt(
+        Math.floor(Math.random() * specialCharacters.length)
+      );
+      pw += specialcaseCharacter;
+      console.log("hello i am here specical " + specialcaseCharacter);
     }
     if (numericConfirm) {
       characterSet += numbers;
+      var numericcaseCharacter = numbers.charAt(
+        Math.floor(Math.random() * numbers.length)
+      );
+      pw += numericcaseCharacter;
+      console.log(
+        "hello i am here numericcaseCharacter " + numericcaseCharacter
+      );
     }
 
     console.log("character set here is " + characterSet);
   }
 
-  var pw = "";
-  var text = "";
-
-  for (var i = 0; i < passwordLength; i++) {
-    // var test = Math.floor(Math.random() * passwordLength);
-    text = characterSet.charAt(Math.floor(Math.random() * characterSet.length));
-    pw = pw + text;
-    // pw += test;
-
-    // return pw;
-    //   console.log("my pw + " + pw);
+  for (var i = pw.length; i < passwordLength; i++) {
+    pw += characterSet.charAt(Math.floor(Math.random() * characterSet.length));
   }
-  console.log("my great pw is " + pw);
 
-  //condition for special chatacter
-
-  return pw; //return number of characters for the password
+  return pw;
 }
 
 // Write password to the #password input
