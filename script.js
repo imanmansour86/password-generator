@@ -4,13 +4,13 @@ var generateBtn = document.querySelector("#generate");
 function generatePassword() {
   var characterSet = "";
   var pw = "";
-  var text = "";
 
+  // Ask the user for the length of the password
   var passwordLength = prompt(
     "How many characters would you like your password to contain?",
     "Enter a number"
   );
-  //If user cancel the prompt
+  //If user cancels the prompt
   if (!passwordLength) {
     return;
   }
@@ -28,6 +28,8 @@ function generatePassword() {
     var uppercaseConfirm = confirm("Do you want to include uppercase?");
     var numericConfirm = confirm("Do you want to include numeric?");
     var specialConfirm = confirm("Do you want to include special characters?");
+
+    // user must include at least one of the confirm messages
     if (
       !lowercaseConfirm &&
       !uppercaseConfirm &&
@@ -42,47 +44,39 @@ function generatePassword() {
     var numbers = "0123456789";
     var specialCharacters = " !\"#$%&'()*+,-./:;<=>?@[]^_`{|}~";
 
-    characterSet = "";
-
     if (lowercaseConfirm) {
+      //add at least one lower case character to the password
       characterSet += lowercase;
       var lowercaseCharacter = lowercase.charAt(
         Math.floor(Math.random() * lowercase.length)
       );
       pw += lowercaseCharacter;
-      console.log("hello i am here lower " + lowercaseCharacter);
     }
     if (uppercaseConfirm) {
+      //add at least one upper case character to the password
       characterSet += uppercase;
       var uppercaseCharacter = uppercase.charAt(
         Math.floor(Math.random() * uppercase.length)
       );
       pw += uppercaseCharacter;
-
-      console.log("hello i am here upper " + uppercaseCharacter);
     }
     if (specialConfirm) {
+      //add at least one special case character to the password
       characterSet += specialCharacters;
       var specialcaseCharacter = specialCharacters.charAt(
         Math.floor(Math.random() * specialCharacters.length)
       );
       pw += specialcaseCharacter;
-      console.log("hello i am here specical " + specialcaseCharacter);
     }
     if (numericConfirm) {
+      //add at least one numeric case character to the password
       characterSet += numbers;
       var numericcaseCharacter = numbers.charAt(
         Math.floor(Math.random() * numbers.length)
       );
       pw += numericcaseCharacter;
-      console.log(
-        "hello i am here numericcaseCharacter " + numericcaseCharacter
-      );
     }
-
-    console.log("character set here is " + characterSet);
   }
-
   for (var i = pw.length; i < passwordLength; i++) {
     pw += characterSet.charAt(Math.floor(Math.random() * characterSet.length));
   }
